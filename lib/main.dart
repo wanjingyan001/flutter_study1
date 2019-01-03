@@ -7,8 +7,9 @@ import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
+import 'package:study1/notification_test.dart';
 import 'package:study1/pointer_test.dart';
-import 'package:study1/scroll_controller_test.dart';
+//import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
 import 'package:study1/theme_test.dart';
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
-          child: Drag(),
+          child: ScrollNotificationTest(),
         ),
       ),
     );

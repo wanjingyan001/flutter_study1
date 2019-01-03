@@ -48,6 +48,7 @@ class MyTestNotificationRoute extends StatefulWidget {
 
 class _NotificationRouteState extends State<MyTestNotificationRoute> {
   String _msg = "";
+  var notic = MyTestNotification("count:");
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +59,11 @@ class _NotificationRouteState extends State<MyTestNotificationRoute> {
         });
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Builder(builder: (context) {
             return RaisedButton(
               onPressed: () {
-                var notic = MyTestNotification("count:");
                 notic.count++;
                 notic.dispatch(context);
               },
