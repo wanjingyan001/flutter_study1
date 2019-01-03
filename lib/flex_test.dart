@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+
 class FlexLayoutTest extends StatelessWidget {
+  static const String routeName = '/FlexLayoutTest';
   @override
   Widget build(BuildContext context) {
     return Column(

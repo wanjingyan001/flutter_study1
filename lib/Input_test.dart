@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InputTest extends StatefulWidget {
+  static const String routeName = '/InputTest';
   @override
   _InputTestState createState() {
-    // TODO: implement createState
     return _InputTestState();
   }
 }

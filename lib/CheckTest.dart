@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CheckTest extends StatefulWidget {
+  static const String routeName = '/CheckTest';
   @override
   _CheckTestState createState() {
     return _CheckTestState();
