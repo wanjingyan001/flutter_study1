@@ -5,6 +5,7 @@ import 'package:study1/GestureRecognizer_test.dart';
 import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
+import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/notification_test.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
-          child: ScrollNotificationTest(),
+          child: ScaleAnimationRoute(),
         ),
       ),
     );
