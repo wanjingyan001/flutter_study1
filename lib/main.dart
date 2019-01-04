@@ -10,6 +10,8 @@ import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/notification_test.dart';
 import 'package:study1/pointer_test.dart';
+import 'package:study1/route/MyRoute.dart';
+
 //import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
 import 'package:study1/theme_test.dart';
@@ -17,6 +19,8 @@ import 'package:study1/theme_test.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  var childList = routes;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +37,29 @@ class MyApp extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
-          child: ScaleAnimationRoute(),
+          child: ListView.separated(
+            itemCount: childList.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(childList[index].title),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: childList[index].buildRoute));
+                },
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider(
+                height: 1.5,
+                color: Colors.black54,
+              );
+            },
+          ),
         ),
       ),
     );

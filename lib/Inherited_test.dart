@@ -36,6 +36,7 @@ class _TestWidgetState extends State<_TestWidget> {
 }
 
 class InheritedTest extends StatefulWidget {
+  static const String routeName = '/InheritedTest';
   @override
   State<StatefulWidget> createState() {
     return InheritedTestState();

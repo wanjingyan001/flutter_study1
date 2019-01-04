@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ScrollControllerTestRoute extends StatefulWidget {
+  static const String routeName = "/ScrollControllerTestRoute";
   @override
   State<StatefulWidget> createState() {
     return ControllerTestState();

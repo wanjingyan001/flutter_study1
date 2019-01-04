@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class GestureRecognizerTest extends StatefulWidget {
+  static const String routeName = "/GestureRecognizerTest";
   @override
   State<StatefulWidget> createState() {
     return _GestureRecognizerState();

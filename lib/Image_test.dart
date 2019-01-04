@@ -6,6 +6,7 @@ const verticalPicture =
     "http://imgs.aixifan.com/cms/2018_10_29/1540809919451.jpg?imageView2/1/w/225/h/300";
 
 class ImageTest extends StatefulWidget {
+  static const String routeName = '/ImageTest';
   @override
   _ImageTestState createState() {
     return _ImageTestState();

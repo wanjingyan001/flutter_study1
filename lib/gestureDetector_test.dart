@@ -39,6 +39,7 @@ class _GestureDetectorState extends State<GestureDetectorTest> {
 }
 
 class Drag extends StatefulWidget {
+  static const String routeName = "Drag";
   @override
   State<StatefulWidget> createState() {
     return _DragState();

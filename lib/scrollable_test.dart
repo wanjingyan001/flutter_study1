@@ -48,6 +48,7 @@ class ListTest extends StatelessWidget {
 }
 
 class InfiniteListView extends StatefulWidget {
+  static const String routeName = "/InfiniteListView";
   @override
   InfiniteState createState() {
     return InfiniteState();

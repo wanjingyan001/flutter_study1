@@ -74,6 +74,7 @@ class AnimatedImage extends AnimatedWidget {
 }
 
 class ScaleAnimationRoute extends StatefulWidget {
+  static const String routeName = "/ScaleAnimationRoute";
   @override
   State<StatefulWidget> createState() {
     return _ScaleAnimationState();
