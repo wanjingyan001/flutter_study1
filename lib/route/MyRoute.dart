@@ -7,6 +7,9 @@ import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
+import 'package:study1/route/fade_route.dart';
+import 'package:study1/route/hero_test.dart';
+import 'package:study1/route/stagger_test.dart';
 import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
 import 'package:study1/second_route.dart';
@@ -128,7 +131,27 @@ List<MyRoute> _buildRoute() {
             body: ScaleAnimationRoute(),
           );
         },
-        route: routeBuild(ScaleAnimationRoute()))
+        route: routeBuild(ScaleAnimationRoute())),
+    MyRoute(
+        title: "Hero测试",
+        routeName: HeroAnimationRouteA.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: HeroAnimationRouteA(),
+          );
+        },
+        route: routeBuild(HeroAnimationRouteA())),
+    MyRoute(
+        title: "交错动画测试",
+        routeName: StaggerDemo.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: StaggerDemo(),
+          );
+        },
+        route: routeBuild(SecondRoute(
+          body: StaggerDemo(),
+        )))
   ];
   return routes;
 }
@@ -143,6 +166,9 @@ Route routeBuild(Widget page) {
           child: page,
         );
       });
+//  return FadeRoute(builder: (BuildContext context) {
+//    return page;
+//  });
 }
 
 final List<MyRoute> routes = _buildRoute();
