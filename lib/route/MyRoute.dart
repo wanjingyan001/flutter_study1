@@ -5,6 +5,7 @@ import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
+import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
@@ -154,6 +155,24 @@ List<MyRoute> _buildRoute() {
           body: StaggerDemo(),
         ))),
     MyRoute(
+        title: "自定义渐变按钮",
+        routeName: GradientTest.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: GradientTest(),
+          );
+        },
+        route: routeBuild(GradientTest())),
+    MyRoute(
+        title: "自定义旋转控件",
+        routeName: TurnBoxTest.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: TurnBoxTest(),
+          );
+        },
+        route: routeBuild(TurnBoxTest())),
+    MyRoute(
         title: "customPainter",
         routeName: CustomPainterTest.routeName,
         buildRoute: (context) {
@@ -161,7 +180,16 @@ List<MyRoute> _buildRoute() {
         },
         route: routeBuild(SecondRoute(
           body: CustomPainterTest(),
-        )))
+        ))),
+    MyRoute(
+        title: "自定义绘制",
+        routeName: GradientCircularProgressRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: GradientCircularProgressRoute(),
+          );
+        },
+        route: routeBuild(GradientCircularProgressRoute())),
   ];
   return routes;
 }
