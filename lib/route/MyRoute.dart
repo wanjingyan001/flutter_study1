@@ -5,6 +5,7 @@ import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
+import 'package:study1/custom_paint_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/route/fade_route.dart';
@@ -151,6 +152,15 @@ List<MyRoute> _buildRoute() {
         },
         route: routeBuild(SecondRoute(
           body: StaggerDemo(),
+        ))),
+    MyRoute(
+        title: "customPainter",
+        routeName: CustomPainterTest.routeName,
+        buildRoute: (context) {
+          return SecondRoute(body: CustomPainterTest());
+        },
+        route: routeBuild(SecondRoute(
+          body: CustomPainterTest(),
         )))
   ];
   return routes;
