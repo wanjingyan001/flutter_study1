@@ -7,6 +7,7 @@ import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
+import 'package:study1/file/file_write_read_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/route/fade_route.dart';
@@ -190,6 +191,15 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(GradientCircularProgressRoute())),
+    MyRoute(
+        title: "文件操作",
+        routeName: FileOperationRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: FileOperationRoute(),
+          );
+        },
+        route: routeBuild(FileOperationRoute()))
   ];
   return routes;
 }
