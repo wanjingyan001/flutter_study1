@@ -1,9 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:study1/bean/ApiResult.dart';
+import 'package:study1/bean/WeatherResult.dart';
+import 'package:study1/bean/weather.dart';
 import 'package:study1/http_test/request_constant.dart';
+import 'package:study1/util.dart';
+import 'package:logging/logging.dart';
 
 class HttpClientTest1 extends StatefulWidget {
   static const String routeName = '/HttpClientTest1';
@@ -15,6 +21,7 @@ class HttpClientTest1 extends StatefulWidget {
 }
 
 class _HttpClient1State extends State<HttpClientTest1> {
+  final Logger log = Logger("Http");
   String searchKey = "";
   String weatherJson = "";
   bool isLoading = false;
@@ -28,23 +35,32 @@ class _HttpClient1State extends State<HttpClientTest1> {
     });
   }
 
-  Future<String> _queryWeather(String cityKey) async {
+  Future _queryWeather(String cityKey) async {
     HttpClient client = HttpClient();
     String result;
     try {
-//      Uri uri = Uri(
-//          scheme: "http",
-//          host: "v.juhe.cn/weather/index",
-//          queryParameters: {"cityname": cityKey, "key": WEATHER_API_KEY});
       HttpClientRequest request = await client.getUrl(Uri.parse(
           "$WEATHER_REQUEST_URL?cityname=$cityKey&key=$WEATHER_API_KEY"));
       HttpClientResponse response = await request.close();
       result = await response.transform(utf8.decoder).join();
+      print(response.headers);
     } on HttpException {
       print("error");
     } finally {
       client.close();
     }
+    return result;
+  }
+
+  Future<WeatherResult> _queryWeatherByDio(String cityKey) async {
+    Dio dio = DioSingleton().httpDio();
+    Response response = await dio.get("/weather/index",
+        data: {"cityname": cityKey, "key": WEATHER_API_KEY, "format": 2});
+//    print(response.headers);
+    print("data==>${response.data}");
+    Map dataMap = json.decode(response.data);
+    WeatherResult result = WeatherResult.fromJson(dataMap);
+    print("json model=====>${result.toJson()}");
     return result;
   }
 
@@ -77,11 +93,12 @@ class _HttpClient1State extends State<HttpClientTest1> {
                               setState(() {
                                 isLoading = true;
                               });
-                              _queryWeather(searchKey).then((str) {
-                                if (str != null && str.isNotEmpty) {
+                              _queryWeatherByDio(searchKey).then((bean) {
+                                if (bean != null) {
                                   setState(() {
                                     isLoading = false;
-                                    weatherJson = str;
+                                    weatherJson =
+                                        bean.result.today.dressingAdvice;
                                   });
                                 }
                               });

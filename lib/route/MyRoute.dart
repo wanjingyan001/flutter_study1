@@ -5,12 +5,14 @@ import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
+import 'package:study1/channel_test/method_channel_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
 import 'package:study1/file/file_write_read_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/http_test/httpClient_test.dart';
+import 'package:study1/http_test/web_socket_test.dart';
 import 'package:study1/route/fade_route.dart';
 import 'package:study1/route/hero_test.dart';
 import 'package:study1/route/stagger_test.dart';
@@ -20,10 +22,11 @@ import 'package:study1/second_route.dart';
 import 'package:study1/theme_test.dart';
 
 class MyRoute {
-  const MyRoute({@required this.title,
-    @required this.routeName,
-    @required this.buildRoute,
-    @required this.route})
+  const MyRoute(
+      {@required this.title,
+      @required this.routeName,
+      @required this.buildRoute,
+      @required this.route})
       : assert(title != null),
         assert(routeName != null),
         assert(buildRoute != null);
@@ -204,9 +207,29 @@ List<MyRoute> _buildRoute() {
         title: "聚合天气测试",
         routeName: HttpClientTest1.routeName,
         buildRoute: (context) {
-          return SecondRoute(body: HttpClientTest1(),);
+          return SecondRoute(
+            body: HttpClientTest1(),
+          );
         },
         route: routeBuild(HttpClientTest1())),
+    MyRoute(
+        title: "webSocket",
+        routeName: WebSocketRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: WebSocketRoute(),
+          );
+        },
+        route: routeBuild(WebSocketRoute())),
+    MyRoute(
+        title: "原生Flutter沟通",
+        routeName: MethodChannelTest.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: MethodChannelTest(),
+          );
+        },
+        route: routeBuild(MethodChannelTest())),
   ];
   return routes;
 }

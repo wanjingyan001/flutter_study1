@@ -50,7 +50,9 @@ class MyApp extends StatelessWidget {
                 onTap: () {
 //                  Navigator.push(context,
 //                      CupertinoPageRoute(builder: childList[index].buildRoute));
-                  Navigator.push(context, childList[index].route);
+                  Navigator.push(context, childList[index].route).then((d){
+                    print(d);
+                  });
                 },
               );
             },
