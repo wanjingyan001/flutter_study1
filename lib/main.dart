@@ -8,6 +8,7 @@ import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
+import 'package:study1/my_demo_theme.dart';
 import 'package:study1/notification_test.dart';
 import 'package:study1/pointer_test.dart';
 import 'package:study1/route/MyRoute.dart';
@@ -25,13 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: buildLightTheme(),
 //      home: ThemeTestRoute(),
       home: Scaffold(
         appBar: AppBar(
           title: Text("WarpLayoutTest"),
+          actions: <Widget>[Icon(Icons.all_inclusive)],
         ),
         body: Container(
           width: double.infinity,
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 onTap: () {
 //                  Navigator.push(context,
 //                      CupertinoPageRoute(builder: childList[index].buildRoute));
-                  Navigator.push(context, childList[index].route).then((d){
+                  Navigator.push(context, childList[index].route).then((d) {
                     print(d);
                   });
                 },

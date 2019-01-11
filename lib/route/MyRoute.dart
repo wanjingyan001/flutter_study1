@@ -8,6 +8,7 @@ import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/channel_test/method_channel_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
+import 'package:study1/dialog/dialog_test.dart';
 import 'package:study1/file/file_write_read_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
@@ -230,6 +231,15 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(MethodChannelTest())),
+    MyRoute(
+        title: "Dialog测试",
+        routeName: DialogDemo.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: DialogDemo(),
+          );
+        },
+        route: routeBuild(DialogDemo())),
   ];
   return routes;
 }
