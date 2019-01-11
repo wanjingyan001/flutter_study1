@@ -20,14 +20,14 @@ import 'package:study1/route/stagger_test.dart';
 import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
 import 'package:study1/second_route.dart';
+import 'package:study1/tablayout_test.dart';
 import 'package:study1/theme_test.dart';
 
 class MyRoute {
-  const MyRoute(
-      {@required this.title,
-      @required this.routeName,
-      @required this.buildRoute,
-      @required this.route})
+  const MyRoute({@required this.title,
+    @required this.routeName,
+    @required this.buildRoute,
+    @required this.route})
       : assert(title != null),
         assert(routeName != null),
         assert(buildRoute != null);
@@ -67,6 +67,13 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(DecorationTest())),
+    MyRoute(
+        title: "TabBarLayout",
+        routeName: TabAppBarRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(body: TabAppBarRoute(),);
+        },
+        route: routeBuild(TabAppBarRoute())),
     MyRoute(
         title: "数据共享测试",
         routeName: InheritedTest.routeName,
