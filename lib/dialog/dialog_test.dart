@@ -119,6 +119,8 @@ class _DialogDemo extends State<DialogDemo> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.white,
+                      border: Border.all(
+                          color: theme.accentColor.withOpacity(0.3), width: 1),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.grey[350],
@@ -131,15 +133,18 @@ class _DialogDemo extends State<DialogDemo> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                leading: Icon(Icons.adjust),
-                                title: Text("第${index + 1}项"),
-                              );
-                            },
-                            itemCount: 15,
-                            itemExtent: 50,
+                          Container(
+                            height: 400,
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  leading: Icon(Icons.adjust),
+                                  title: Text("第${index + 1}项"),
+                                );
+                              },
+                              itemCount: 15,
+                              itemExtent: 50,
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8),
