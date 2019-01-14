@@ -5,6 +5,9 @@ import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
 import 'package:study1/animation/anim_test1.dart';
+import 'package:study1/bottom_navigation_bar/bottom_app_bar.dart';
+import 'package:study1/bottom_navigation_bar/bottom_navigationbar.dart';
+import 'package:study1/bottom_navigation_bar/navigation_keep_alive.dart';
 import 'package:study1/channel_test/method_channel_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
@@ -14,6 +17,7 @@ import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/http_test/httpClient_test.dart';
 import 'package:study1/http_test/web_socket_test.dart';
+import 'package:study1/route/custom_route.dart';
 import 'package:study1/route/fade_route.dart';
 import 'package:study1/route/hero_test.dart';
 import 'package:study1/route/stagger_test.dart';
@@ -22,12 +26,14 @@ import 'package:study1/scrollable_test.dart';
 import 'package:study1/second_route.dart';
 import 'package:study1/tablayout_test.dart';
 import 'package:study1/theme_test.dart';
+import 'dart:math';
 
 class MyRoute {
-  const MyRoute({@required this.title,
-    @required this.routeName,
-    @required this.buildRoute,
-    @required this.route})
+  const MyRoute(
+      {@required this.title,
+      @required this.routeName,
+      @required this.buildRoute,
+      @required this.route})
       : assert(title != null),
         assert(routeName != null),
         assert(buildRoute != null);
@@ -71,7 +77,9 @@ List<MyRoute> _buildRoute() {
         title: "TabBarLayout",
         routeName: TabAppBarRoute.routeName,
         buildRoute: (context) {
-          return SecondRoute(body: TabAppBarRoute(),);
+          return SecondRoute(
+            body: TabAppBarRoute(),
+          );
         },
         route: routeBuild(TabAppBarRoute())),
     MyRoute(
@@ -247,23 +255,51 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(DialogDemo())),
+    MyRoute(
+        title: "BottomNavigationBar测试",
+        routeName: NavigationKeepAlive.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: NavigationKeepAlive(),
+          );
+        },
+        route: routeBuild(NavigationKeepAlive())),
+    MyRoute(
+        title: 'BottomAppBar测试',
+        routeName: BottomAppBarTest.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: BottomAppBarTest(),
+          );
+        },
+        route: routeBuild(BottomAppBarTest()))
   ];
   return routes;
 }
 
 Route routeBuild(Widget page) {
-  return PageRouteBuilder(
-      transitionDuration: Duration(milliseconds: 500),
-      pageBuilder: (BuildContext context, Animation animation,
-          Animation secondaryAnimation) {
-        return FadeTransition(
-          opacity: animation,
-          child: page,
-        );
-      });
+  var routes = _myRoutes(page);
+  return routes[Random().nextInt(routes.length)];
+//  return PageRouteBuilder(
+//      transitionDuration: Duration(milliseconds: 500),
+//      pageBuilder: (BuildContext context, Animation animation,
+//          Animation secondaryAnimation) {
+//        return FadeTransition(
+//          opacity: animation,
+//          child: page,
+//        );
+//      });
 //  return FadeRoute(builder: (BuildContext context) {
 //    return page;
 //  });
+}
+
+List _myRoutes(Widget widget) {
+  CustomRoute route = CustomRoute(widget);
+  CustomRoute1 route1 = CustomRoute1(widget);
+  CustomRoute2 route2 = CustomRoute2(widget);
+  CustomRoute3 route3 = CustomRoute3(widget);
+  return [route, route1, route2, route3];
 }
 
 final List<MyRoute> routes = _buildRoute();

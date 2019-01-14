@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/animation.dart';
 import 'dart:math' as math;
 
@@ -75,6 +77,7 @@ class AnimatedImage extends AnimatedWidget {
 
 class ScaleAnimationRoute extends StatefulWidget {
   static const String routeName = "/ScaleAnimationRoute";
+
   @override
   State<StatefulWidget> createState() {
     return _ScaleAnimationState();
@@ -82,22 +85,32 @@ class ScaleAnimationRoute extends StatefulWidget {
 }
 
 class _ScaleAnimationState extends State<ScaleAnimationRoute>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
+
+  AnimationController _controller2;
+  Animation<double> _animation2;
 
   @override
   void initState() {
     super.initState();
     controller =
         AnimationController(vsync: this, duration: Duration(seconds: 3));
-    animation = CurvedAnimation(parent: controller, curve: Curves.easeOut);
+    _controller2 =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+
+    animation = CurvedAnimation(
+        parent: controller, curve: Interval(0.0, 0.78, curve: Curves.easeOut));
+    _animation2 = Tween(begin: 0.0, end: 175.0).animate(CurvedAnimation(
+        parent: controller, curve: Interval(0.79, 1.0, curve: Curves.easeOut)));
     animation = Tween(begin: 0.0, end: 300.0).animate(animation)
       ..addStatusListener((status) {
         switch (status) {
           case AnimationStatus.completed:
             //动画结束
-            controller.reverse();
+            _controller2.forward();
+//            controller.reverse();
             break;
           case AnimationStatus.dismissed:
             //动画恢复初始
@@ -116,9 +129,15 @@ class _ScaleAnimationState extends State<ScaleAnimationRoute>
 
   @override
   Widget build(BuildContext context) {
-    return GrowTransition(
-      child: Image.asset("assets/as_background.jpeg"),
-      animation: animation,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('动画'),
+      ),
+      body: GrowTransition(
+        child: Image.asset("assets/as_background.jpeg"),
+        animation: animation,
+        animation2: _animation2,
+      ),
     );
   }
 
@@ -126,14 +145,16 @@ class _ScaleAnimationState extends State<ScaleAnimationRoute>
   void dispose() {
     super.dispose();
     controller.dispose();
+    _controller2.dispose();
   }
 }
 
 class GrowTransition extends StatelessWidget {
-  GrowTransition({this.child, this.animation});
+  GrowTransition({this.child, this.animation, this.animation2});
 
   final Widget child;
   final Animation<double> animation;
+  final Animation<double> animation2;
 
   @override
   Widget build(BuildContext context) {
@@ -141,10 +162,37 @@ class GrowTransition extends StatelessWidget {
       child: AnimatedBuilder(
         animation: animation,
         builder: (context, child) {
-          return Container(
-            width: animation.value,
-            height: animation.value,
-            child: child,
+          return Stack(
+            children: <Widget>[
+              Center(
+                child: Container(
+                  width: animation.value,
+                  height: animation.value,
+                  child: child,
+                ),
+              ),
+              Center(
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: Container(
+                        width: animation2.value,
+                        height: animation2.value,
+                        decoration: BoxDecoration(color: Colors.grey.shade200),
+                        child: Center(
+                          child: Text(
+                            'Frosted',
+                            style: Theme.of(context).textTheme.display2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           );
         },
         child: child,
