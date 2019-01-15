@@ -4,6 +4,7 @@ import 'package:study1/GestureRecognizer_test.dart';
 import 'package:study1/Image_test.dart';
 import 'package:study1/Inherited_test.dart';
 import 'package:study1/Input_test.dart';
+import 'package:study1/Jiugongge.dart';
 import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/bottom_navigation_bar/bottom_app_bar.dart';
 import 'package:study1/bottom_navigation_bar/bottom_navigationbar.dart';
@@ -23,6 +24,7 @@ import 'package:study1/route/hero_test.dart';
 import 'package:study1/route/stagger_test.dart';
 import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
+import 'package:study1/search_bar.dart';
 import 'package:study1/second_route.dart';
 import 'package:study1/tablayout_test.dart';
 import 'package:study1/theme_test.dart';
@@ -272,7 +274,23 @@ List<MyRoute> _buildRoute() {
             body: BottomAppBarTest(),
           );
         },
-        route: routeBuild(BottomAppBarTest()))
+        route: routeBuild(BottomAppBarTest())),
+    MyRoute(
+        title: 'SearchBar测试',
+        routeName: SearchBarRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: SearchBarRoute(),
+          );
+        },
+        route: routeBuild(SearchBarRoute())),
+    MyRoute(
+        title: '九宫格测试',
+        routeName: JiuGongGeRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(body: JiuGongGeRoute(),);
+        },
+        route: routeBuild(JiuGongGeRoute())),
   ];
   return routes;
 }

@@ -37,32 +37,28 @@ class MyApp extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
-          child: ListView.separated(
-            itemCount: childList.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(childList[index].title),
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2),
+              itemCount: childList.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Text(childList[index].title),
+                    ),
                   ),
-                ),
-                onTap: () {
-//                  Navigator.push(context,
-//                      CupertinoPageRoute(builder: childList[index].buildRoute));
-                  Navigator.push(context, childList[index].route).then((d) {
-                    print(d);
-                  });
-                },
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Divider(
-                height: 1.5,
-                color: Colors.black54,
-              );
-            },
-          ),
+                  onTap: () {
+                    Navigator.push(context, childList[index].route).then((d) {
+                      print(d);
+                    });
+                  },
+                );
+              }),
         ),
       ),
     );
