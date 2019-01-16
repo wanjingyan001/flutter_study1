@@ -27,6 +27,7 @@ import 'package:study1/scroll_controller_test.dart';
 import 'package:study1/scrollable_test.dart';
 import 'package:study1/search_bar.dart';
 import 'package:study1/second_route.dart';
+import 'package:study1/slive_test.dart';
 import 'package:study1/tablayout_test.dart';
 import 'package:study1/theme_test.dart';
 import 'dart:math';
@@ -302,7 +303,14 @@ List<MyRoute> _buildRoute() {
             body: ExpansionDemo(),
           );
         },
-        route: routeBuild(ExpansionDemo()))
+        route: routeBuild(ExpansionDemo())),
+    MyRoute(
+        title: 'Sliver测试',
+        routeName: SliverTestRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(body: SliverTestRoute());
+        },
+        route: routeBuild(SliverTestRoute()))
   ];
   return routes;
 }
