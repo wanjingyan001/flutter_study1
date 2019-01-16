@@ -13,6 +13,7 @@ import 'package:study1/channel_test/method_channel_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
 import 'package:study1/dialog/dialog_test.dart';
+import 'package:study1/expansion/expansion_mian.dart';
 import 'package:study1/file/file_write_read_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
@@ -288,9 +289,20 @@ List<MyRoute> _buildRoute() {
         title: '九宫格测试',
         routeName: JiuGongGeRoute.routeName,
         buildRoute: (context) {
-          return SecondRoute(body: JiuGongGeRoute(),);
+          return SecondRoute(
+            body: JiuGongGeRoute(),
+          );
         },
         route: routeBuild(JiuGongGeRoute())),
+    MyRoute(
+        title: 'Expansion测试',
+        routeName: ExpansionDemo.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: ExpansionDemo(),
+          );
+        },
+        route: routeBuild(ExpansionDemo()))
   ];
   return routes;
 }
