@@ -10,6 +10,7 @@ import 'package:study1/bottom_navigation_bar/bottom_app_bar.dart';
 import 'package:study1/bottom_navigation_bar/bottom_navigationbar.dart';
 import 'package:study1/bottom_navigation_bar/navigation_keep_alive.dart';
 import 'package:study1/channel_test/method_channel_test.dart';
+import 'package:study1/custom_widget/bezier_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
 import 'package:study1/custom_paint_test.dart';
 import 'package:study1/dialog/dialog_test.dart';
@@ -19,6 +20,7 @@ import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/http_test/httpClient_test.dart';
 import 'package:study1/http_test/web_socket_test.dart';
+import 'package:study1/recordable_demo.dart';
 import 'package:study1/route/custom_route.dart';
 import 'package:study1/route/fade_route.dart';
 import 'package:study1/route/hero_test.dart';
@@ -310,7 +312,25 @@ List<MyRoute> _buildRoute() {
         buildRoute: (context) {
           return SecondRoute(body: SliverTestRoute());
         },
-        route: routeBuild(SliverTestRoute()))
+        route: routeBuild(SliverTestRoute())),
+    MyRoute(
+        title: '贝塞尔测试',
+        routeName: BezierTestRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: BezierTestRoute(),
+          );
+        },
+        route: routeBuild(BezierTestRoute())),
+    MyRoute(
+        title: '拖拽排序列表',
+        routeName: RecordableListRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: RecordableListRoute(),
+          );
+        },
+        route: routeBuild(RecordableListRoute())),
   ];
   return routes;
 }
