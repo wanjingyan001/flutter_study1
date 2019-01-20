@@ -25,6 +25,7 @@ import 'package:study1/recordable_demo.dart';
 import 'package:study1/route/custom_route.dart';
 import 'package:study1/route/fade_route.dart';
 import 'package:study1/route/hero_test.dart';
+import 'package:study1/route/route_test.dart';
 import 'package:study1/route/stagger_test.dart';
 import 'package:study1/list/scroll_controller_test.dart';
 import 'package:study1/list/scrollable_test.dart';
@@ -350,7 +351,16 @@ List<MyRoute> _buildRoute() {
             body: ScreenShotRoute(),
           );
         },
-        route: routeBuild(ScreenShotRoute()))
+        route: routeBuild(ScreenShotRoute())),
+    MyRoute(
+        title: '路由测试',
+        routeName: RouteTest.routeName,
+        buildRoute: (ctx) {
+          return SecondRoute(
+            body: RouteTest(),
+          );
+        },
+        route: routeBuild(RouteTest())),
   ];
   return routes;
 }
