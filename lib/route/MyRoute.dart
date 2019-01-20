@@ -20,16 +20,18 @@ import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/http_test/httpClient_test.dart';
 import 'package:study1/http_test/web_socket_test.dart';
+import 'package:study1/list/swip_detach_list.dart';
 import 'package:study1/recordable_demo.dart';
 import 'package:study1/route/custom_route.dart';
 import 'package:study1/route/fade_route.dart';
 import 'package:study1/route/hero_test.dart';
 import 'package:study1/route/stagger_test.dart';
-import 'package:study1/scroll_controller_test.dart';
-import 'package:study1/scrollable_test.dart';
+import 'package:study1/list/scroll_controller_test.dart';
+import 'package:study1/list/scrollable_test.dart';
+import 'package:study1/screen_shot_demo.dart';
 import 'package:study1/search_bar.dart';
 import 'package:study1/second_route.dart';
-import 'package:study1/slive_test.dart';
+import 'package:study1/list/slive_test.dart';
 import 'package:study1/tablayout_test.dart';
 import 'package:study1/theme_test.dart';
 import 'dart:math';
@@ -331,6 +333,24 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(RecordableListRoute())),
+    MyRoute(
+        title: '侧滑删除测试',
+        routeName: SwipeDetachListRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: SwipeDetachListRoute(),
+          );
+        },
+        route: routeBuild(SwipeDetachListRoute())),
+    MyRoute(
+        title: '截图测试',
+        routeName: ScreenShotRoute.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: ScreenShotRoute(),
+          );
+        },
+        route: routeBuild(ScreenShotRoute()))
   ];
   return routes;
 }

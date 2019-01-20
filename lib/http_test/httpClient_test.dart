@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logging/logging.dart';
 import 'package:study1/bean/ApiResult.dart';
 import 'package:study1/bean/WeatherResult.dart';
 import 'package:study1/bean/weather.dart';
 import 'package:study1/http_test/request_constant.dart';
 import 'package:study1/util/util.dart';
-import 'package:logging/logging.dart';
+
 
 class HttpClientTest1 extends StatefulWidget {
   static const String routeName = '/HttpClientTest1';
