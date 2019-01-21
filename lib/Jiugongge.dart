@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class JiuGongGeRoute extends StatefulWidget {
   static const String routeName = '/JiuGongGeRoute';
@@ -56,6 +59,13 @@ class _JiuGongGeState extends State<JiuGongGeRoute> {
     );
   }
 
+  Future _getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _urls.add(image.path);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -80,9 +90,9 @@ class _JiuGongGeState extends State<JiuGongGeRoute> {
         child: Container(
           width: 100,
           height: 100,
-          color: Colors.amber,
+          color: Colors.transparent,
           child: Center(
-            child: Image.asset(_urls[index]),
+            child: Image.file(File(_urls[index])),
           ),
         ),
       );
@@ -91,8 +101,6 @@ class _JiuGongGeState extends State<JiuGongGeRoute> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,15 +108,15 @@ class _JiuGongGeState extends State<JiuGongGeRoute> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              setState(() {
-                if (index == _urls.length - 1) {
-                  if (_urls.length < 9) {
-                    _urls..insert(index,'assets/as_background.jpeg');
-                  }
-                } else {
-                  _urls.removeAt(index);
+              if (index == _urls.length - 1) {
+                if (_urls.length < 9) {
+                  _getImage();
                 }
-              });
+              } else {
+                setState(() {
+                  _urls.removeAt(index);
+                });
+              }
             },
             child: _buildItem(index),
           );

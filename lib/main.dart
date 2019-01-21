@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:study1/my_demo_theme.dart';
 import 'package:study1/splash_screen.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  setCustomErrorPage();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -14,4 +17,14 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
     );
   }
+}
+
+
+void setCustomErrorPage(){
+  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
+    print(flutterErrorDetails.toString());
+    return Center(
+      child: Text("Flutter 走神了"),
+    );
+  };
 }

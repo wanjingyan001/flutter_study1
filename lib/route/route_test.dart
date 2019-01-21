@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class RouteTest extends StatefulWidget {
   static const String routeName = '/RouteTest';
+
   @override
   State<StatefulWidget> createState() {
     return _RouteState();
@@ -20,6 +21,10 @@ class _RouteState extends State<RouteTest> {
         '/test2': (_) => RouteTestChild2(
               value: 'test2',
             ),
+        '/test3': (_) => RouteTestChild3(
+              value: 'test3',
+            ),
+        '/test4': (_) => RouteTestChild4(),
       },
       home: Scaffold(
         appBar: AppBar(
@@ -35,31 +40,38 @@ class _RouteState extends State<RouteTest> {
               }));
             }),
             _buildItemBtn('路由表1', () {
-              Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-                return SimpleDialog(
-                  title: Text('选择跳转页面'),
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/test1');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text('跳转到test1'),
-                      ),
-                    ),
-                    GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text('跳转到test2'),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/test2');
-                      },
-                    )
-                  ],
-                );
-              }));
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: Text('选择跳转页面'),
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/test1');
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Text('跳转到test1'),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Text('跳转到test2'),
+                          ),
+                          onTap: () {
+                            Navigator.push(context,
+                                CupertinoPageRoute(builder: (ctx) {
+                              return RouteTestChild2(
+                                value: "dialog跳转",
+                              );
+                            }));
+                          },
+                        )
+                      ],
+                    );
+                  });
             }),
             _buildItemBtn('pushNamedAndRemoveUntil', () {
               Navigator.pushNamedAndRemoveUntil(
@@ -78,8 +90,7 @@ class _RouteState extends State<RouteTest> {
                         Text('这是第三个路由子界面'),
                         FlatButton(
                             onPressed: () {
-                              Navigator.popUntil(
-                                  context, (route) =>true);
+                              Navigator.popUntil(context, (route) => true);
                             },
                             child: Text('点击返回'))
                       ],
@@ -171,10 +182,100 @@ class RouteTestChild2 extends StatelessWidget {
               ],
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/test3');
+//              Navigator.popAndPushNamed(context, '/test3');
+            },
+            child: Text('切换到第一个子页面'),
+          ),
         ),
         onWillPop: () async {
           Navigator.pop(context, _controller.value);
           return true;
         });
+  }
+}
+
+class RouteTestChild3 extends StatelessWidget {
+  RouteTestChild3({this.value});
+
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('第三个子页面'),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '这是第三个子页面',
+              style: TextStyle(color: Colors.teal, fontSize: 24),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/test4');
+              },
+              child: Text('切换到其他页面'),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RouteTestChild4 extends StatefulWidget {
+  @override
+  _RouteTestState createState() => _RouteTestState();
+}
+
+class _RouteTestState extends State<RouteTestChild4> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('第四个子页面'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('这是第四个子页面'),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/test1', (route) => false);
+              },
+              child: Text('pushNamedAndRemoveUntil'),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.popUntil(context, (route) => false);
+              },
+              child: Text('popUntil'),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: RaisedButton(
+              onPressed: () {
+//                Navigator.pushReplacement(context, newRoute)
+              },
+              child: Text('子页面三'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

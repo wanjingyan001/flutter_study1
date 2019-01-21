@@ -19,6 +19,7 @@ import 'package:study1/file/file_write_read_test.dart';
 import 'package:study1/flex_test.dart';
 import 'package:study1/gestureDetector_test.dart';
 import 'package:study1/http_test/httpClient_test.dart';
+import 'package:study1/http_test/refresh_demo.dart';
 import 'package:study1/http_test/web_socket_test.dart';
 import 'package:study1/list/swip_detach_list.dart';
 import 'package:study1/recordable_demo.dart';
@@ -334,6 +335,15 @@ List<MyRoute> _buildRoute() {
           );
         },
         route: routeBuild(RecordableListRoute())),
+    MyRoute(
+        title: '刷新测试',
+        routeName: RefreshDemo.routeName,
+        buildRoute: (context) {
+          return SecondRoute(
+            body: RefreshDemo(),
+          );
+        },
+        route: routeBuild(RefreshDemo())),
     MyRoute(
         title: '侧滑删除测试',
         routeName: SwipeDetachListRoute.routeName,
