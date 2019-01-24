@@ -51,11 +51,14 @@ class HomeApp extends StatelessWidget {
                           child: Text(childList[index].title),
                         ),
                       ),
-                      onTap: () {
-                        Navigator.push(context, childList[index].route)
-                            .then((d) {
-                          Fluttertoast.showToast(msg: d.toString());
-                        });
+                      onTap: () async {
+                        var result = await Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: childList[index].buildRoute));
+                        if (result != null) {
+                          Fluttertoast.showToast(msg: result.toString());
+                        }
                       },
                     );
                   }),

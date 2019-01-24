@@ -6,12 +6,14 @@ class RouteDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+//      initialRoute: '/screen1',
       home: new Screen1(),
       routes: <String, WidgetBuilder>{
         '/screen1': (BuildContext context) => new Screen1(),
         '/screen2': (BuildContext context) => new Screen2(),
         '/screen3': (BuildContext context) => new Screen3(),
-        '/screen4': (BuildContext context) => new Screen4()
+        '/screen4': (BuildContext context) => new Screen4(),
+        '/screen5': (BuildContext context) => new Screen5('userName null'),
       },
     );
   }
@@ -34,6 +36,9 @@ class Screen1 extends StatelessWidget {
             new RaisedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/screen2');
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return Screen2();
+                }));
               },
               child: new Text("Push to Screen 2"),
             ),
@@ -88,7 +93,9 @@ class Screen2 extends StatelessWidget {
           children: <Widget>[
             new RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/screen3');
+                Navigator.of(context).pushNamed('/screen3').then((result) {
+                  print('Screen2:${result.toString()}');
+                });
               },
               child: new Text("Push to Screen 3"),
             ),
@@ -156,7 +163,12 @@ class Screen3 extends StatelessWidget {
             ),
             new RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/screen4');
+                Navigator.of(context)
+                    .pushReplacementNamed('/screen4',
+                        result: 'screen3 replace screen4')
+                    .then((result) {
+                  print('Screen3:${result.toString()}');
+                });
               },
               child: new Text("Push Replacement Named"),
             ),
@@ -175,7 +187,7 @@ class Screen3 extends StatelessWidget {
             new RaisedButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/screen4', ModalRoute.withName('/screen1'));
+                    '/screen4', ModalRoute.withName('/screen2'));
                 // Navigator.of(context).pushNamedAndRemoveUntil('/screen4', (Route<dynamic> route) => false);
               },
               child: new Text("Push Named and Remove Until"),
@@ -260,6 +272,8 @@ class Screen4 extends StatelessWidget {
             new RaisedButton(
               onPressed: () {
                 Navigator.popUntil(context, ModalRoute.withName('/screen2'));
+                //等同
+//                Navigator.pop(context);
               },
               child: new Text("popUntil"),
             ),
@@ -281,6 +295,17 @@ class Screen4 extends StatelessWidget {
                 print(value);
               },
               child: new Text("Return"),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Center(
+                child: Text('pop'),
+              ),
             )
           ],
         ),

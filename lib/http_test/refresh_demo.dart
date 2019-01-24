@@ -116,8 +116,11 @@ class _RefreshDemoState extends State<RefreshDemo> {
           _images.clear();
           _refreshList();
         },
-        onOffsetChange: (bol,offset){
-          _refreshList();
+        onOffsetChange: (bol, offset) {
+          print("offset===>$offset");
+//          if (offset == 10) {
+//            _refreshList();
+//          }
         },
       ),
     );
