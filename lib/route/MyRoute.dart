@@ -10,6 +10,7 @@ import 'package:study1/animation/anim_test1.dart';
 import 'package:study1/bottom_navigation_bar/bottom_app_bar.dart';
 import 'package:study1/bottom_navigation_bar/bottom_navigationbar.dart';
 import 'package:study1/bottom_navigation_bar/navigation_keep_alive.dart';
+import 'package:study1/buildcontext_demo.dart';
 import 'package:study1/channel_test/method_channel_test.dart';
 import 'package:study1/custom_widget/bezier_test.dart';
 import 'package:study1/custom_widget/custom_test.dart';
@@ -53,7 +54,7 @@ class MyRoute {
   final String title;
   final String routeName;
   final WidgetBuilder buildRoute;
-  final Route route;//有问题
+  final Route route; //有问题
 }
 
 List<MyRoute> _buildRoute() {
@@ -247,6 +248,11 @@ List<MyRoute> _buildRoute() {
         buildRoute: (ctx) => RouteDemo(),
 //        route: routeBuild(RouteTest())),
         route: routeBuild(RouteDemo())),
+    MyRoute(
+        title: 'context测试',
+        routeName: BuildContextDemo.routeName,
+        buildRoute: (ctx) => BuildContextDemo(),
+        route: routeBuild(BuildContextDemo())),
   ];
   return routes;
 }

@@ -74,3 +74,13 @@ abstract class JsonString{
   "url" : "http://www.getdropbox.com/u/2/screencast.html"
 }''';
 }
+
+
+
+void printContextInfo(String name,BuildContext context){
+  print('$name context type:${context.runtimeType}\n');
+  print('$name context widget type:${context.widget.runtimeType}\n');
+  print('$name context owner type:${context.owner.runtimeType}\n');
+  print('$name context:${context.toString()}\n');
+}
+

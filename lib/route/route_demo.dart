@@ -36,9 +36,9 @@ class Screen1 extends StatelessWidget {
             new RaisedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/screen2');
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return Screen2();
-                }));
+//                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+//                  return Screen2();
+//                }));
               },
               child: new Text("Push to Screen 2"),
             ),
@@ -93,9 +93,10 @@ class Screen2 extends StatelessWidget {
           children: <Widget>[
             new RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/screen3').then((result) {
-                  print('Screen2:${result.toString()}');
-                });
+//                Navigator.of(context).pushNamed('/screen3').then((result) {
+//                  print('Screen2:${result.toString()}');
+//                });
+                Navigator.of(context).pushNamed('/screen3');
               },
               child: new Text("Push to Screen 3"),
             ),
@@ -187,8 +188,14 @@ class Screen3 extends StatelessWidget {
             new RaisedButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/screen4', ModalRoute.withName('/screen2'));
-                // Navigator.of(context).pushNamedAndRemoveUntil('/screen4', (Route<dynamic> route) => false);
+                    '/screen4', ModalRoute.withName('/screen3'));
+//                Navigator.of(context).pushNamedAndRemoveUntil(
+//                    '/screen4', (Route<dynamic> route) => false);
+
+//                //and
+//                Navigator.of(context).pushAndRemoveUntil(
+//                    MaterialPageRoute(builder: (context) => Screen4()),
+//                    (_) => false);
               },
               child: new Text("Push Named and Remove Until"),
             ),
@@ -271,7 +278,7 @@ class Screen4 extends StatelessWidget {
           children: <Widget>[
             new RaisedButton(
               onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/screen2'));
+                Navigator.popUntil(context, ModalRoute.withName('/screen1'));
                 //等同
 //                Navigator.pop(context);
               },
