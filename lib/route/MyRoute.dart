@@ -33,6 +33,7 @@ import 'package:study1/route/route_test.dart';
 import 'package:study1/route/stagger_test.dart';
 import 'package:study1/list/scroll_controller_test.dart';
 import 'package:study1/list/scrollable_test.dart';
+import 'package:study1/rx_dart_demo/rx_list_page.dart';
 import 'package:study1/screen_shot_demo.dart';
 import 'package:study1/search_bar.dart';
 import 'package:study1/second_route.dart';
@@ -253,6 +254,11 @@ List<MyRoute> _buildRoute() {
         routeName: BuildContextDemo.routeName,
         buildRoute: (ctx) => BuildContextDemo(),
         route: routeBuild(BuildContextDemo())),
+    MyRoute(
+        title: 'RxDart测试',
+        routeName: RxDartListPage.routeName,
+        buildRoute: (ctx) => RxDartListPage(),
+        route: routeBuild(RxDartListPage())),
   ];
   return routes;
 }

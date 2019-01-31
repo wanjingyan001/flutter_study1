@@ -3,6 +3,7 @@ import 'package:study1/util/util.dart';
 
 class BuildContextDemo extends StatelessWidget {
   static const String routeName = '/BuildContextDemo';
+
   @override
   Widget build(BuildContext context) {
     printContextInfo('根节点', context);
@@ -31,8 +32,16 @@ class BuildContextDemo extends StatelessWidget {
                   child: Text('内容'),
                 ),
                 actions: <Widget>[
-                  FlatButton(onPressed: () {}, child: Text('取消')),
-                  FlatButton(onPressed: () {}, child: Text('确定'))
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('取消')),
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('确定'))
                 ],
               );
             });
